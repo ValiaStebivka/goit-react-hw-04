@@ -1,0 +1,22 @@
+.container {
+  margin: 30px auto;
+  text-align: center;
+}
+
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.wrapper:hover .icon {
+  fill: #910a67;
+}
+
+.icon {
+  height: 36px;
+  width: 36px;
+  transition: fill 0.15s ease;
+  margin-right: 20px;
+}
