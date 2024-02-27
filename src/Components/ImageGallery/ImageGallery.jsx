@@ -3,35 +3,33 @@ import { ImageCard } from "../ImageCard/ImageCard";
 import { ImageModal } from "../ImageModal/ImageModal";
 import css from "./ImageGallery.module.css";
 
-export const ImageGallery = ({ data }) => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+export const ImageGallery = ({ images }) => {
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const [selectedImg, setSelectedImg] = useState(null);
 
-  const openModal = (x) => {
-    setSelectedImg(x);
-    setModalIsOpen(true);
+  const handleOpenModal = (image) => {
+    setSelectedImg(image);
+    setIsOpenModal(true);
   };
 
-  const closeModal = () => {
-    setModalIsOpen(false);
+  const onCloseModal = () => {
+    setIsOpenModal(false);
   };
 
   return (
     <ul id="gallery" className={css.gallery}>
-      {data.map((item) => {
+      {images.map((item) => {
         return (
-          <li key={item.id} onClick={() => openModal(item)}>
+          <li key={item.id} onClick={() =>  handleOpenModal(item)}>
             <ImageCard imgData={item} />
           </li>
         );
       })}
-      {selectedImg && (
         <ImageModal
-          isOpened={modalIsOpen}
-          close={closeModal}
+          isOpened={isOpenModal}
+          close={onCloseModal}
           imgData={selectedImg}
         />
-      )}
     </ul>
   );
 };

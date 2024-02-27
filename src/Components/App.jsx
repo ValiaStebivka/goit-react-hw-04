@@ -67,7 +67,7 @@ function App() {
           Whoops! Something bad happened, try to reload the page
         </ErrorMessage>
       ) : photos.length > 0 ? (
-        <ImageGallery data={photos} openModal={handleOpenModal} /> //  обробник для відкриття модального вікна
+        <ImageGallery images={photos} openModal={handleOpenModal} /> //  обробник для відкриття модального вікна
       ) : null}
       {total === 0 && <ErrorMessage>No results found </ErrorMessage>}
       {loading && <Loader />}
