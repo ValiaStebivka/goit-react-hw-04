@@ -7,11 +7,8 @@ export const SearchBar = ({ onSearch }) => {
   const searchSchema = Yup.object().shape({
     search: Yup.string()
       .min(3, "")
-      .required(() => {
-        toast("Input your search request");
-        return null;
-      }),
-  });
+      .required(),
+      });
 
   return (
     <header className={css.head}>
@@ -20,8 +17,9 @@ export const SearchBar = ({ onSearch }) => {
         initialValues={{
           search: "",
         }}
+
         onSubmit={(values, actions) => {
-          if (values.search.trim() === "") return;
+          
           onSearch(values.search.trim());
           actions.resetForm();
         }}

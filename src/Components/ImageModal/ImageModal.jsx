@@ -2,7 +2,7 @@ import Modal from "react-modal";
 import css from "./ImageModal.module.css";
 
 Modal.setAppElement("#root");
-export const ImageModal = ({ isOpened, close, imgData }) => {
+export const ImageModal = ({ isOpened, close, url, alt }) => {
   // Видалила оператор console.log
   return (
     <Modal
@@ -14,17 +14,14 @@ export const ImageModal = ({ isOpened, close, imgData }) => {
       className={css.modal}
       overlayClassName={css.overlay}
     >
-      <button className={css.closeBtn} onClick={() => close()}>
-        Close
-      </button>
+    
       {/* Додано перевірку на наявність imgData та imgData.urls перед використанням */}
-      {imgData && imgData.urls && (
         <img
           className={css.mainImg}
-          src={imgData.urls.regular || imgData.urls.small} 
-          alt={imgData.alt_description || "Default image description"}
+          src={url} 
+          alt={alt}
         />
-      )}
+      
     </Modal>
   );
 };
