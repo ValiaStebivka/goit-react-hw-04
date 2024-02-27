@@ -6,6 +6,7 @@ import { ImageGallery } from "./ImageGallery/ImageGallery";
 import { Loader } from "./Loader/Loader";
 import { ErrorMessage } from "./ErrorMessage/ErrorMessage";
 import { LoadMoreBtn } from "./LoadMoreBtn/LoadMoreBtn";
+import { ImageModal } from "./ImageModal/ImageModal"; // + імпорт компоненту модального вікна
 
 function App() {
   const [query, setQuery] = useState("");
@@ -14,6 +15,8 @@ function App() {
   const [error, setError] = useState(false);
   const [photos, setPhotos] = useState([]);
   const [total, setTotal] = useState(null);
+  const [isModalOpened, setIsModalOpened] = useState(false); // + стан для керування відкриттям/закриттям модального вікна
+  const [selectedPhoto, setSelectedPhoto] = useState(null); // Стан для збереження вибраного фото для модального вікна
 
   const handleSearch = async (newQuery) => {
     setQuery(`${Date.now()}/${newQuery}`);
@@ -23,6 +26,18 @@ function App() {
   };
 
   const handleLoadMore = () => setPage(page + 1);
+
+  // Функція для відкриття модального вікна та встановлення вибраного фото
+  const handleOpenModal = (photo) => {
+    setSelectedPhoto(photo);
+    setIsModalOpened(true);
+  };
+
+  // Функція для закриття модального вікна
+  const handleCloseModal = () => {
+    setIsModalOpened(false);
+    setSelectedPhoto(null);
+  };
 
   useEffect(() => {
     if (query === "") return;
@@ -49,15 +64,23 @@ function App() {
       <SearchBar onSearch={handleSearch} />
       {error ? (
         <ErrorMessage>
-          Whoops! Something bad happened, try reloading page
+          Whoops! Something bad happened, try to reload the page
         </ErrorMessage>
       ) : photos.length > 0 ? (
-        <ImageGallery data={photos} />
+        <ImageGallery data={photos} openModal={handleOpenModal} /> //  обробник для відкриття модального вікна
       ) : null}
       {total === 0 && <ErrorMessage>No results found </ErrorMessage>}
       {loading && <Loader />}
       {photos.length > 0 && page * 9 <= total && !loading && !error && (
         <LoadMoreBtn loadMore={handleLoadMore} />
+      )}
+      {/* Додаю компонент модального вікна з відповідним станом та обробниками */}
+      {selectedPhoto && (
+        <ImageModal
+          isOpened={isModalOpened}
+          close={handleCloseModal}
+          imgData={selectedPhoto}
+        />
       )}
     </>
   );

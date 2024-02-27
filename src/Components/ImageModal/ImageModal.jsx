@@ -3,7 +3,7 @@ import css from "./ImageModal.module.css";
 
 Modal.setAppElement("#root");
 export const ImageModal = ({ isOpened, close, imgData }) => {
-  console.log(imgData);
+  // Видалила оператор console.log
   return (
     <Modal
       isOpen={isOpened}
@@ -15,13 +15,16 @@ export const ImageModal = ({ isOpened, close, imgData }) => {
       overlayClassName={css.overlay}
     >
       <button className={css.closeBtn} onClick={() => close()}>
-        close
+        Close
       </button>
-      <img
-        className={css.mainImg}
-        src={imgData.urls.regular || imgData.urls.small} 
-        alt={imgData.alt_description || "Default image description"}
-      />
+      {/* Додано перевірку на наявність imgData та imgData.urls перед використанням */}
+      {imgData && imgData.urls && (
+        <img
+          className={css.mainImg}
+          src={imgData.urls.regular || imgData.urls.small} 
+          alt={imgData.alt_description || "Default image description"}
+        />
+      )}
     </Modal>
   );
 };

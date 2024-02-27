@@ -7,7 +7,7 @@ export const LoadMoreBtn = ({ loadMore }) => {
       <div className={css.container}>
         <div className={css.wrapper} onClick={loadMore}>
           <AiOutlineReload className={css.icon} />
-          <span>Show more</span>
+          <span>Show more photos</span>
         </div>
       </div>
     </>

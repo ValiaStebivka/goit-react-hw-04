@@ -1,9 +1,9 @@
 .head {
-  background-color: #2a2c72;
+  background-color: blue;
   position: sticky;
   top: 0;
   width: 100vw;
-  border-bottom: 1px solid rgb(55, 39, 55);
+  border-bottom: 1px solid #ff00ae;
   z-index: 10;
 }
 .searchForm {
@@ -22,7 +22,7 @@
 }
 
 .searchInput:focus {
-  border-bottom: 1px solid #910a67;
+  border-bottom: 1px solid #ff00ae;
 }
 
 .searchForm button {
@@ -35,7 +35,7 @@
   cursor: pointer;
 
   background-color: #fefefe;
-  color: rgb(79, 47, 79);
+  color: #ff00ae;
 
   text-transform: uppercase;
   font-size: 12px;
@@ -44,12 +44,12 @@
 }
 
 .searchForm button:hover {
-  background-color: #874773;
+  background-color: #ff00ae;
   color: #fff;
 }
 
 .searchForm button:active {
-  background-color: #910a67;
+  background-color: #ff00ae85;
 }
 
 .errorMes {
